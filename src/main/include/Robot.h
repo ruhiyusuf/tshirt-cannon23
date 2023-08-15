@@ -8,6 +8,7 @@
 
 #include <frc/TimedRobot.h>
 #include <frc/TimedRobot.h>
+#include <frc/XboxController.h>
 #include <frc/Joystick.h>
 #include <frc/AnalogInput.h>
 #include <rev/CANSparkMax.h>
@@ -31,25 +32,30 @@ class Robot : public frc::TimedRobot {
   void SimulationInit() override;
   void SimulationPeriodic() override;
 
-  static const int leftLeadDeviceID = 12; // 12
-  static const int leftFollowDeviceID = 13;
-  static const int rightLeadDeviceID = 15; // 15
-  static const int rightFollowDeviceID = 14;
+  static const int leftLeadDeviceID = 8; // 8
+  //static const int leftFollowDeviceID = 13;
+  static const int rightLeadDeviceID = 11; // 11
+  //static const int rightFollowDeviceID = 14;
 
-  static const int lcompressorID = 1;
-  static const int rcompressorID = 2;
+  double left_y = 0.0;
+  double right_x = 0.0;
+
+  static const int lcompressorID = 7;
+  static const int rcompressorID = 10;
+  
+  SFDrive* m_robotDrive = new SFDrive(m_leftLeadMotor, m_rightLeadMotor);
 
   rev::CANSparkMax* m_leftLeadMotor = new rev::CANSparkMax(leftLeadDeviceID, rev::CANSparkMax::MotorType::kBrushless);
   rev::CANSparkMax* m_rightLeadMotor = new rev::CANSparkMax(rightLeadDeviceID, rev::CANSparkMax::MotorType::kBrushless);
-  rev::CANSparkMax* m_leftFollowMotor = new rev::CANSparkMax(leftFollowDeviceID, rev::CANSparkMax::MotorType::kBrushless);
-  rev::CANSparkMax* m_rightFollowMotor = new rev::CANSparkMax(rightFollowDeviceID, rev::CANSparkMax::MotorType::kBrushless);
 
   bool reached_max_pressure = false;
 
-  rev::CANSparkMax* lcompressor = new rev::CANSparkMax(leftLeadDeviceID, rev::CANSparkMax::MotorType::kBrushless);
-  rev::CANSparkMax* rcompressor = new rev::CANSparkMax(leftLeadDeviceID, rev::CANSparkMax::MotorType::kBrushless);
-  frc::Joystick * joystick = new frc::Joystick(0);
-  frc::PneumaticsControlModule * pcm = new frc::PneumaticsControlModule(20);
+  frc::Joystick* m_stick = new frc::Joystick{0};
 
-  frc::Solenoid * solenoidValve = new frc::Solenoid(20, frc::PneumaticsModuleType::CTREPCM, 1);
+  // rev::CANSparkMax* lcompressor = new rev::CANSparkMax(leftLeadDeviceID, rev::CANSparkMax::MotorType::kBrushless);
+  // rev::CANSparkMax* rcompressor = new rev::CANSparkMax(leftLeadDeviceID, rev::CANSparkMax::MotorType::kBrushless);
+  // frc::XboxController * ctr = new frc::XboxController(0);
+  // frc::PneumaticsControlModule * pcm = new frc::PneumaticsControlModule(20);
+
+  // frc::Solenoid * solenoidValve = new frc::Solenoid(20, frc::PneumaticsModuleType::CTREPCM, 1);
 };

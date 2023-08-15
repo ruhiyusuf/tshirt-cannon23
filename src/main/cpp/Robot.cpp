@@ -8,7 +8,16 @@
 
 #include <frc/smartdashboard/SmartDashboard.h>
 
-void Robot::RobotInit() {}
+void Robot::RobotInit() {
+  m_leftLeadMotor->RestoreFactoryDefaults();
+  m_rightLeadMotor->RestoreFactoryDefaults();
+
+  m_leftLeadMotor->SetIdleMode(rev::CANSparkMax::IdleMode::kBrake);
+  m_rightLeadMotor->SetIdleMode(rev::CANSparkMax::IdleMode::kBrake);
+
+  m_leftLeadMotor->SetInverted(true);
+  m_rightLeadMotor->SetInverted(false);
+}
 
 /**
  * This function is called every 20 ms, no matter the mode. Use
@@ -18,7 +27,8 @@ void Robot::RobotInit() {}
  * <p> This runs after the mode specific periodic functions, but before
  * LiveWindow and SmartDashboard integrated updating.
  */
-void Robot::RobotPeriodic() {}
+void Robot::RobotPeriodic() {
+  }
 
 /**
  * This autonomous (along with the chooser code above) shows how to select
@@ -35,25 +45,31 @@ void Robot::AutonomousInit() {}
 
 void Robot::AutonomousPeriodic() {}
 
-void Robot::TeleopInit() {}
+void Robot::TeleopInit() {
+
+}
 
 void Robot::TeleopPeriodic() {
-  reached_max_pressure = (pcm->GetPressureSwitch());
-  if (joystick->GetRawButton(1) && !reached_max_pressure){
-      lcompressor->Set(1.0);
-      rcompressor->Set(1.0);
-  }
-  
-  if (joystick->GetRawButtonPressed(3) || reached_max_pressure){
-      lcompressor->Set(0.0);
-      rcompressor->Set(0.0);
-  }
+  left_y = m_stick->GetRawAxis(1);
+  right_x = m_stick->GetRawAxis(4);
+  m_robotDrive->ArcadeDrive(-left_y, right_x);    
 
-  if (joystick->GetRawButton(2)) {
-    solenoidValve->Set(1);
-  } else {
-    solenoidValve->Set(0);
-  }
+  // reached_max_pressure = (pcm->GetPressureSwitch());
+  // if (ctr->GetAButtonPressed() && !reached_max_pressure){
+  //     lcompressor->Set(1.0);
+  //     rcompressor->Set(1.0);
+  // }
+  
+  // if (ctr->GetBButtonPressed() || reached_max_pressure){
+  //     lcompressor->Set(0.0);
+  //     rcompressor->Set(0.0);
+  // }
+
+  // if (ctr->GetXButton()) {
+  //   solenoidValve->Set(1);
+  // } else {
+  //   solenoidValve->Set(0);
+  // }
     
 }
 
