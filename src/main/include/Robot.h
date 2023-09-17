@@ -40,7 +40,7 @@ class Robot : public frc::TimedRobot {
   double left_y = 0.0;
   double right_x = 0.0;
 
-  static const int lcompressorID = 7;
+  static const int lcompressorID = 18;
   static const int rcompressorID = 10;
   
   
@@ -53,10 +53,10 @@ class Robot : public frc::TimedRobot {
   frc::Joystick* m_stick = new frc::Joystick{0};
   SFDrive* m_robotDrive = new SFDrive(m_leftLeadMotor, m_rightLeadMotor);
 
-  rev::CANSparkMax* lcompressor = new rev::CANSparkMax(leftLeadDeviceID, rev::CANSparkMax::MotorType::kBrushless);
-  rev::CANSparkMax* rcompressor = new rev::CANSparkMax(leftLeadDeviceID, rev::CANSparkMax::MotorType::kBrushless);
+  rev::CANSparkMax* lcompressor = new rev::CANSparkMax(lcompressorID, rev::CANSparkMax::MotorType::kBrushless);
+  rev::CANSparkMax* rcompressor = new rev::CANSparkMax(rcompressorID, rev::CANSparkMax::MotorType::kBrushless);
   frc::XboxController * ctr = new frc::XboxController(0);
   frc::PneumaticsControlModule * pcm = new frc::PneumaticsControlModule(20);
 
-  frc::Solenoid * solenoidValve = new frc::Solenoid(20, frc::PneumaticsModuleType::CTREPCM, 1);
+  frc::Solenoid * solenoidValve = new frc::Solenoid(20, frc::PneumaticsModuleType::CTREPCM, 0);
 };
