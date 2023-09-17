@@ -6,7 +6,6 @@
 
 #include <fmt/core.h>
 
-#include <frc/smartdashboard/SmartDashboard.h>
 
 void Robot::RobotInit() {
   m_leftLeadMotor->RestoreFactoryDefaults();
@@ -55,21 +54,21 @@ void Robot::TeleopPeriodic() {
   m_robotDrive->ArcadeDrive(-left_y, right_x);    
 
   // reached_max_pressure = (pcm->GetPressureSwitch());
-  // if (ctr->GetAButtonPressed() && !reached_max_pressure){
-  //     lcompressor->Set(1.0);
-  //     rcompressor->Set(1.0);
-  // }
+  if (ctr->GetAButtonPressed()){
+      //lcompressor->Set(1.0);
+      rcompressor->Set(1.0);
+  }
   
-  // if (ctr->GetBButtonPressed() || reached_max_pressure){
-  //     lcompressor->Set(0.0);
-  //     rcompressor->Set(0.0);
-  // }
+  if (ctr->GetBButtonPressed()){
+      //lcompressor->Set(0.0);
+      rcompressor->Set(0.0);
+  }
 
-  // if (ctr->GetXButton()) {
-  //   solenoidValve->Set(1);
-  // } else {
-  //   solenoidValve->Set(0);
-  // }
+  if (ctr->GetXButton()) {
+     solenoidValve->Set(1);
+  } else {
+     solenoidValve->Set(0);
+  }
     
 }
 
