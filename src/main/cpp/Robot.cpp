@@ -6,7 +6,6 @@
 
 #include <fmt/core.h>
 
-#include <frc/smartdashboard/SmartDashboard.h>
 
 void Robot::RobotInit() {
   m_leftLeadMotor->RestoreFactoryDefaults();
