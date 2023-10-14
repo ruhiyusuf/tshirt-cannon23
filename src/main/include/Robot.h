@@ -52,13 +52,10 @@ class Robot : public frc::TimedRobot {
   frc::Joystick* m_stick = new frc::Joystick{0};
   SFDrive* m_robotDrive = new SFDrive(m_leftLeadMotor, m_rightLeadMotor);
 
-  SFDrive* m_robotDrive = new SFDrive(m_leftLeadMotor, m_rightLeadMotor);
-
   rev::CANSparkMax* lcompressor = new rev::CANSparkMax(lcompressorID, rev::CANSparkMax::MotorType::kBrushed);
   rev::CANSparkMax* rcompressor = new rev::CANSparkMax(rcompressorID, rev::CANSparkMax::MotorType::kBrushed);
   frc::XboxController * ctr = new frc::XboxController(0);
   // frc::PneumaticsControlModule * pcm = new frc::PneumaticsControlMocdule(20);
 
-  frc::Solenoid * solenoidValve = new frc::Solenoid(20, frc::PneumaticsModuleType::CTREPCM, 0);
   frc::Solenoid * solenoidValve = new frc::Solenoid(20, frc::PneumaticsModuleType::CTREPCM, 0);
 };
