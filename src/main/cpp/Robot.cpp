@@ -12,8 +12,8 @@ void Robot::RobotInit() {
   m_leftLeadMotor->RestoreFactoryDefaults();
   m_rightLeadMotor->RestoreFactoryDefaults();
 
-  m_leftLeadMotor->SetIdleMode(rev::CANSparkMax::IdleMode::kBrake);
-  m_rightLeadMotor->SetIdleMode(rev::CANSparkMax::IdleMode::kBrake);
+  m_leftLeadMotor->SetIdleMode(rev::CANSparkMax::IdleMode::kCoast);
+  m_rightLeadMotor->SetIdleMode(rev::CANSparkMax::IdleMode::kCoast);
 
   m_leftLeadMotor->SetInverted(true);
   m_rightLeadMotor->SetInverted(false);
@@ -52,24 +52,24 @@ void Robot::TeleopInit() {
 void Robot::TeleopPeriodic() {
   left_y = m_stick->GetRawAxis(1);
   right_x = m_stick->GetRawAxis(4);
-  m_robotDrive->ArcadeDrive(-left_y, right_x);    
+  m_robotDrive->ArcadeDrive(left_y, -1.0 * right_x);    
 
   // reached_max_pressure = (pcm->GetPressureSwitch());
-  // if (ctr->GetAButtonPressed() && !reached_max_pressure){
-  //     lcompressor->Set(1.0);
-  //     rcompressor->Set(1.0);
-  // }
+  if (ctr->GetAButtonPressed() && !reached_max_pressure){
+      lcompressor->Set(1.0);
+      rcompressor->Set(1.0);
+  }
   
-  // if (ctr->GetBButtonPressed() || reached_max_pressure){
-  //     lcompressor->Set(0.0);
-  //     rcompressor->Set(0.0);
-  // }
+  if (ctr->GetBButtonPressed() || reached_max_pressure){
+      lcompressor->Set(0.0);
+      rcompressor->Set(0.0);
+  }
 
-  // if (ctr->GetXButton()) {
-  //   solenoidValve->Set(1);
-  // } else {
-  //   solenoidValve->Set(0);
-  // }
+  if (ctr->GetXButton()) {
+    solenoidValve->Set(1);
+  } else {
+    solenoidValve->Set(0);
+  }
     
 }
 

@@ -18,8 +18,8 @@ void SFDrive::ArcadeDrive(double xSpeed, double zRotation)
         zRotation = 0;
 
     if (xSpeed >= 0.0) {
-        leftMotorOutput = xSpeed + zRotation;
-        rightMotorOutput = xSpeed - zRotation;
+        leftMotorOutput = xSpeed + zRotation; 
+        rightMotorOutput = xSpeed - zRotation; 
     }
     else {
         leftMotorOutput = xSpeed - zRotation;
